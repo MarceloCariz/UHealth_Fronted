@@ -1,5 +1,5 @@
 import { ErrorMessage, useField } from "formik"
-import {Select} from '@mui/material';
+import {Select, Typography} from '@mui/material';
 
 interface Props{
     label: string;
@@ -18,9 +18,12 @@ export const MySelect = ({label, ...props}:Props) => {
             <Select 
             defaultValue={"seleccione"} 
             label={label}
-            variant="filled"
+            variant="outlined"
             fullWidth {...field} {...props} />
-            <ErrorMessage name={props.name} component="span" className="error"/>
+            <Typography color={"error"}>
+                <ErrorMessage name={props.name} component="span" className="error"/>
+            </Typography>
+
         </>
     )
 }

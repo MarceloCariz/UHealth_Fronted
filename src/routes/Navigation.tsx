@@ -23,14 +23,15 @@ export const Navigation = () => {
 
                 {/* Protegidas */}
                 <Routes>
-
-                    <Route path='home' element={<HomePageLayout/>}>
+                    
+                    <Route  path='/home' element={<HomePageLayout/>}>
                         {
-                            routesHome.map( ({ path, Component  }) => (
+                            routesHome.map( ({ path, Component , index }) => (
                                 <Route 
                                     key={ path }
                                     path={ path }
                                     element={ <Component /> } 
+                                    index={index}
                                 />
                             ))
                         }

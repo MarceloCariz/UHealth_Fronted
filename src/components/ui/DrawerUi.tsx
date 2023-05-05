@@ -2,12 +2,14 @@ import { Drawer , Box, Typography, List, ListItem, ListItemButton, ListItemIcon,
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { toogleDrawer } from '../../store/slices/ui/uiSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 export const DrawerUi = () => {
 
     const {isOpenDrawer} = useAppSelector(state => state.ui);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     return (
         <Drawer
             anchor={"left"}
@@ -17,24 +19,23 @@ export const DrawerUi = () => {
             <Box sx={{width: 250, marginTop: "1rem"}}>
             <Typography component={"h2"} fontSize={28} textAlign="center" fontWeight={"semibold"}>Menu</Typography>
             <List>
-
                 <ListItem  disablePadding>
-                    <ListItemButton >
-                    <ListItemIcon>
-                        <AccessTimeIcon color="primary"/>
-                    </ListItemIcon>
-                    <ListItemText primary={"Crear rutina"} />
+                    <ListItemButton onClick={() => navigate('/home')}>
+                        <ListItemIcon>
+                            <AccessTimeIcon color="primary"/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Crear rutina"} />
                     </ListItemButton>
                 </ListItem>
             </List>
             <Divider />
             <List>
                 <ListItem  disablePadding>
-                    <ListItemButton>
-                    <ListItemIcon>
-                        {/* ICON */}
-                    </ListItemIcon>
-                    <ListItemText primary={"Rutinas"} />
+                    <ListItemButton onClick={() => navigate('routines')}>
+                        <ListItemIcon>
+                            {/* ICON */}
+                        </ListItemIcon>
+                        <ListItemText primary={"Rutinas"} />
                     </ListItemButton>
                 </ListItem>
             </List>

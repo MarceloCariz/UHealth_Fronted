@@ -11,7 +11,7 @@ export const AppBar = () => {
 
     return (
         <Box >
-            <AppBarMui  sx={{backgroundColor: '#3fbb05e2'}} elevation={2} position="static">
+            <AppBarMui color='secondary'   elevation={2} position="static">
             <Container maxWidth="xl">
                 <Toolbar  >
                 <IconButton
