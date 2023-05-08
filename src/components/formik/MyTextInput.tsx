@@ -1,5 +1,5 @@
 import { ErrorMessage, useField } from "formik";
-import { Box,  TextField } from "@mui/material";
+import { Box,  TextField, Typography } from "@mui/material";
 
 interface Props{
     label: string;
@@ -17,7 +17,9 @@ export const MyTextInput = ({label, ...props}:Props) => {
         <Box display={"flex"} flexDirection="column">
             {/* <FormLabel className="text-left  font-semibold text-lg" htmlFor={props.id || props.name}>{label}</FormLabel> */}
             <TextField label={label} {...field} {...props} />
-            <ErrorMessage className="error"  name={props.name} component="span"/>
+            <Typography>
+                <ErrorMessage className="error"  name={props.name} component="span"/>
+            </Typography>
         </Box>
     )
 }

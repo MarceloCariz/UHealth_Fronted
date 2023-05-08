@@ -4,12 +4,16 @@ import {  UserI } from '../../../interfaces';
 export interface UserState{
     user: UserI | null;
     token: string;
+    error: string;
+    loading: boolean;
 }
 
 
 const initialState:UserState = {
     user: null,
-    token: ''
+    token: '',
+    error: '',
+    loading: false,
 }
 
 
@@ -20,16 +24,23 @@ export const authSlice = createSlice({
     reducers:{
         startLogin: (state, action) => {
             state.token = action.payload;
+            state.loading = true;
             return state;
         },
         setUser: (state, action) => {
             state.user = action.payload.user;
             state.token = action.payload.token;
+            state.loading = false;
             return state;
         },
         logout: (state) => {
             state.user = null;
             state.token = "";
+            localStorage.removeItem("token");
+            return state;
+        },
+        setError: (state, action) =>{
+            state.error = action.payload;
             return state;
         }
 
@@ -39,5 +50,6 @@ export const authSlice = createSlice({
 export const {
     startLogin,
     setUser,
-    logout
+    logout,
+    setError
 } = authSlice.actions;

@@ -9,23 +9,30 @@ import { getUserByToken } from "../store/slices/auth/thunk";
 
 import 'react-toastify/dist/ReactToastify.css';
 
+const token = localStorage.getItem("token");
 
 
 const HomePageLayout = () => {
 
     const dispatch = useAppDispatch();
-    // const {token} = useAppSelector(state => state.auth);
+    const {token: tokenRedux, user} = useAppSelector(state => state.auth);
 
     const navigate = useNavigate();
 
+
     useEffect(()=>{
-        const token = localStorage.getItem("token");
-        if(!token){
-            navigate("/")
-        }
-        console.log("getuserHomeLayout")
+        if(!token) return navigate("/"); 
         dispatch(getUserByToken())
     },[])
+
+
+    useEffect(()=>{
+        if(tokenRedux){
+            dispatch(getUserByToken())
+        }
+    },[])
+
+
     return (
         <> 
             <AppBar/>

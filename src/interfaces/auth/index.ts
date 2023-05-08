@@ -1,7 +1,9 @@
 
 
 export interface UserI {
-    user: UserInfoI;
+    username: string;
+    email: string;
+    role: string;
 }
 
 export interface LoginI {

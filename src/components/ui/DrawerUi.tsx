@@ -8,8 +8,13 @@ import { useNavigate } from 'react-router-dom';
 export const DrawerUi = () => {
 
     const {isOpenDrawer} = useAppSelector(state => state.ui);
+    const {user} = useAppSelector(state => state.auth);
+
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const role = user?.role;
+    console.log(role)
     return (
         <Drawer
             anchor={"left"}
@@ -20,11 +25,13 @@ export const DrawerUi = () => {
             <Typography component={"h2"} fontSize={28} textAlign="center" fontWeight={"semibold"}>Menu</Typography>
             <List>
                 <ListItem  disablePadding>
-                    <ListItemButton onClick={() => navigate('/home')}>
+                    <ListItemButton onClick={() => {
+                            role === "administrador" ? navigate('/home-admin') : navigate("/home")
+                        }}>
                         <ListItemIcon>
                             <AccessTimeIcon color="primary"/>
                         </ListItemIcon>
-                        <ListItemText primary={"Crear rutina"} />
+                        <ListItemText primary={`${role === "usuario" ? "Crear rutina" : "Administrar usuarios"} `} />
                     </ListItemButton>
                 </ListItem>
             </List>
