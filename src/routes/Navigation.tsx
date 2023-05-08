@@ -1,15 +1,20 @@
-import { Suspense } from 'react'
-import { BrowserRouter, Routes , Route} from 'react-router-dom'
+import { Suspense, useEffect } from 'react'
+import { BrowserRouter, Routes , Route, useNavigate} from 'react-router-dom'
 import { routesHome } from './routes'
-import { HomePageLayout } from '../layouts'
+import { AuthPageLayout, HomePageLayout } from '../layouts'
 import { routesNoAuthorization } from './routesNoAuthorization'
 
+
 export const Navigation = () => {
+
+
     return (
         <Suspense fallback={<span>...Loading</span>}>
             <BrowserRouter>
                 {/* No protegidas */}
                 <Routes>
+                    <Route path='/' element={<AuthPageLayout/>}>
+
                         {
                             routesNoAuthorization.map(({ path, Component  })=> (
                                 <Route 
@@ -19,7 +24,8 @@ export const Navigation = () => {
                                 />
                             ))
                         }
-                    </Routes>
+                    </Route>
+                </Routes>
 
                 {/* Protegidas */}
                 <Routes>

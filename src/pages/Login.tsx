@@ -1,7 +1,11 @@
+import { Box } from "@mui/material"
+import { LoginForm } from "../components"
 
 const Login = () => {
     return (
-        <div>Login</div>
+        <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+            <LoginForm/>
+        </Box>
     )
 }
 

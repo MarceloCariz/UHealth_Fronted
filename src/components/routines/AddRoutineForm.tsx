@@ -67,7 +67,7 @@ export const AddRoutineForm = () => {
             }}
             validationSchema={
                 Yup.object({
-                    categorias: Yup.string().oneOf(getCategoriesIds(), 'La categoria debe ser valida').required("Este campo es obligatorio"),
+                    categorias: Yup.string().oneOf(getCategoriesIds(), 'La categoría debe ser válida').required("Este campo es obligatorio"),
                     producto: Yup.string().oneOf(getProductsIds(), "Producto incorrecto").required("Este campo es obligatorio"),
                     horario: Yup.string().oneOf(['mañana','tarde','noche'], "Horaio debe ser mañana, tarde o noche ").required("Este campo es obligatorio"),
                 })
@@ -88,9 +88,9 @@ export const AddRoutineForm = () => {
                                             onChangeProductByCategory(e) 
                                             setFieldValue("producto", "seleccione")
                                         }}
-                                        label="Categorias" name="categorias" 
+                                        label="Categorías" name="categorias" 
                                 >
-                                    <MenuItem  value="seleccione">Seleccione</MenuItem>
+                                    <MenuItem  value="seleccione">Seleccione una categoria</MenuItem>
                                     {
                                         categories.map(({categoryName, id}) => (
                                             <MenuItem  key={id} value={id}>
@@ -108,7 +108,7 @@ export const AddRoutineForm = () => {
                                     label="Producto" name="producto" 
                                     defaultValue={"seleccione"}
                                 >
-                                    <MenuItem  value="seleccione">Seleccione</MenuItem>
+                                    <MenuItem  value="seleccione">Seleccione un producto</MenuItem>
                                     {
                                         products.length > 0 && products.map(({id, productName}) => (
                                             <MenuItem  key={id} value={id}>

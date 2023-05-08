@@ -1,12 +1,31 @@
-import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet , useNavigate} from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHook"
+import { ToastContainer } from "react-toastify";
+
 import {Container, Box} from "@mui/material";
 import { DrawerUi, AppBar } from "../components/ui/";
-import { ToastContainer } from "react-toastify";
+import { getUserByToken } from "../store/slices/auth/thunk";
+
 import 'react-toastify/dist/ReactToastify.css';
 
 
 
 const HomePageLayout = () => {
+
+    const dispatch = useAppDispatch();
+    // const {token} = useAppSelector(state => state.auth);
+
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        const token = localStorage.getItem("token");
+        if(!token){
+            navigate("/")
+        }
+        console.log("getuserHomeLayout")
+        dispatch(getUserByToken())
+    },[])
     return (
         <> 
             <AppBar/>
