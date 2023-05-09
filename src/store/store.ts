@@ -4,6 +4,7 @@ import { categorySlice } from "./slices/category";
 import { productSlice } from "./slices/Product";
 import { routineSlice } from "./slices/routine";
 import { authSlice } from "./slices/auth";
+import { userSlice } from "./slices/user";
 
 
 export const store = configureStore({
@@ -12,7 +13,8 @@ export const store = configureStore({
         ui: uiSlice.reducer,
         category: categorySlice.reducer,
         products: productSlice.reducer,
-        routine: routineSlice.reducer
+        routine: routineSlice.reducer,
+        users: userSlice.reducer,
     }
 })
 

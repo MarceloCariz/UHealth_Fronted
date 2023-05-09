@@ -14,7 +14,6 @@ export const DrawerUi = () => {
     const navigate = useNavigate();
 
     const role = user?.role;
-    console.log(role)
     return (
         <Drawer
             anchor={"left"}
@@ -26,7 +25,7 @@ export const DrawerUi = () => {
             <List>
                 <ListItem  disablePadding>
                     <ListItemButton onClick={() => {
-                            role === "administrador" ? navigate('/home-admin') : navigate("/home")
+                            role === "administrador" ? navigate('users') : navigate("/home")
                         }}>
                         <ListItemIcon>
                             <AccessTimeIcon color="primary"/>

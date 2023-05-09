@@ -32,7 +32,7 @@ export const AppBar = () => {
                                 <MenuIcon sx={{color:"white", fontSize: "3.5rem"}} />
                             </IconButton>
 
-                            <Link to={"/home"} style={{textDecoration: 'none'}}>
+                            <Link to={user?.role === "usuario" ? "/home" : "/dashboard"} style={{textDecoration: 'none'}}>
                                 <Typography variant="h4"   color="white" component="div" sx={{ flexGrow: 1, fontSize:{xs: 28, md: 36}}}>
                                     UHealth
                                 </Typography>

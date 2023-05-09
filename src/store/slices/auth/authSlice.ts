@@ -1,8 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {  UserI } from '../../../interfaces';
+import {  AuthI} from '../../../interfaces';
 
 export interface UserState{
-    user: UserI | null;
+    user: AuthI | null;
     token: string;
     error: string;
     loading: boolean;

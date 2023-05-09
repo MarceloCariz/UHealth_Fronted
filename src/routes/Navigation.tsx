@@ -1,8 +1,10 @@
 import { Suspense, useEffect } from 'react'
 import { BrowserRouter, Routes , Route, useNavigate} from 'react-router-dom'
-import { routesHome } from './routes'
+import {  routesUsers } from './routesUsers'
 import { AuthPageLayout, HomePageLayout } from '../layouts'
 import { routesNoAuthorization } from './routesNoAuthorization'
+import { routesAdmin } from './routesAdmin'
+import { AdminLayout } from '../layouts/AdminLayout'
 
 
 export const Navigation = () => {
@@ -27,12 +29,29 @@ export const Navigation = () => {
                     </Route>
                 </Routes>
 
-                {/* Protegidas */}
+                {/* Protegidas - usuarios*/}
                 <Routes>
                     
                     <Route  path='/home' element={<HomePageLayout/>}>
                         {
-                            routesHome.map( ({ path, Component , index }) => (
+                            routesUsers.map( ({ path, Component , index }) => (
+                                <Route 
+                                    key={ path }
+                                    path={ path }
+                                    element={ <Component /> } 
+                                    index={index}
+                                />
+                            ))
+                        }
+                    </Route>
+                </Routes>
+
+                                {/* Protegidas - Admin*/}
+                <Routes>
+                    
+                    <Route  path='/dashboard' element={<AdminLayout/>}>
+                        {
+                            routesAdmin.map( ({ path, Component , index }) => (
                                 <Route 
                                     key={ path }
                                     path={ path }

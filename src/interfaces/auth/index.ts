@@ -1,6 +1,6 @@
 
 
-export interface UserI {
+export interface AuthI {
     username: string;
     email: string;
     role: string;

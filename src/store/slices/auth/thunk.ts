@@ -40,21 +40,26 @@ export const SignIn = ({email, password}:LoginI) => {
 
 export const getUserByToken = () => {
     return async(dispatch:any, getState:any)=>{
-
+        
         let token = localStorage.getItem("token");
+        // let token = getState.auth.token;
+        if(!token) return;
 
         const headers = {
             Authorization: `Bearer ${token}`,
         }
-        
-        const {data} = await uhealththApi("/user/refresh-token", {headers});
-        const user = {
-            role: data.role,
-            email: data.email,
-            username: data.username,
+        try{
+            const {data} = await uhealththApi("/user/refresh-token", {headers});
+            const user = {
+                role: data.role,
+                email: data.email,
+                username: data.username,
+            }
+            dispatch(setUser({user, token: data.token}))
+        }catch(error){
+            console.log(error)
         }
-        dispatch(setUser({user, token: data.token}))
-        return data;
+
     }
 }
 

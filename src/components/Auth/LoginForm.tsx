@@ -15,13 +15,14 @@ import { useNavigate } from "react-router-dom";
 export const LoginForm = () => {
 
     const dispatch = useAppDispatch();
-    const {token, error} = useAppSelector(state => state.auth);
+    const {token, user} = useAppSelector(state => state.auth);
     const navigate = useNavigate();
 
     const handleLogin = ({email, password}:LoginI) => {
         dispatch(SignIn({email, password}));
         if(token){
-            navigate("/home")
+            // navigate("/home")
+            console.log(user)
         };
     }
 

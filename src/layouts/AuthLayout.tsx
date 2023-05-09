@@ -11,17 +11,27 @@ const AuthPageLayout = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const {token} = useAppSelector(state => state.auth);
+    const {token, user} = useAppSelector(state => state.auth);
 
     useEffect(()=>{
         const token = localStorage.getItem("token");
-        console.log("authlayout")
+        if(user) return;
         if(token){
             dispatch(getUserByToken());
-            navigate("/home");
         }
-
     },[token])
+
+    useEffect(()=>{
+        if(user?.role === "administrador"){
+            navigate("/dashboard")
+            return;
+        }
+        if(user?.role === "usuario"){
+            navigate("/home")
+            return;
+        }
+        if(!user?.role) return navigate("/");
+    },[user]);
 
     return (
             // <Container  maxWidth={"xl"}  >

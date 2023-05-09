@@ -20,7 +20,7 @@ export const AddRoutineForm = () => {
         dispatch(getCategories());
     }, [])
 
-    const initialValues ={
+    const initialValues = {
         // productId: "",
         categorias: "seleccione",
         producto: "seleccione",

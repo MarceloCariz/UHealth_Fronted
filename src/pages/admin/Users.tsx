@@ -1,7 +1,14 @@
+import {Box, Typography} from '@mui/material'
+import { ListUsers } from '../../components'
 
 const Users = () => {
+    
+
     return (
-        <div>Users</div>
+        <Box>
+            <Typography variant='h4' textAlign={"center"} >Administrar usuarios</Typography>
+            <ListUsers/>
+        </Box>
     )
 }
 

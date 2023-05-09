@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-const HomePageLayout = () => {
+const AdminLayout = () => {
     const token = localStorage.getItem("token");
     const dispatch = useAppDispatch();
     const {user} = useAppSelector(state => state.auth);
@@ -21,12 +21,12 @@ const HomePageLayout = () => {
 
 
     useEffect(()=>{
-        console.log("1")
         if(!token) return navigate("/");
+        if(user && user.role === "usuario") return navigate("/home");
         if(user === null){
             dispatch(getUserByToken());
         }
-    },[])
+    },[user])
 
 
 
@@ -55,4 +55,4 @@ const HomePageLayout = () => {
     )
 }
 
-export  {HomePageLayout}
+export  {AdminLayout}

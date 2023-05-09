@@ -13,7 +13,7 @@ export interface RoutesI {
 }
 
 
-export const routesHome: RoutesI[] = [
+export const routesUsers: RoutesI[] = [
     {
         path: '',
         to: '',

@@ -1,5 +1,4 @@
 import uhealththApi from "../../../api/uhealthAxios"
-import { useTokenInterceptor } from "../../../hooks";
 import { setCategories } from "./categorySlice";
 
 export const getCategories = () => {
