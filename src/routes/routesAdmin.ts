@@ -1,5 +1,4 @@
-import Dashboard from "../pages/admin/Dashboard";
-import Users from "../pages/admin/Users";
+import {Users, Dashboard} from "../pages/admin/users/";
 import { RoutesI } from "./routesUsers";
 
 

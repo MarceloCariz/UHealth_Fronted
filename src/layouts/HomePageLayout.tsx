@@ -21,11 +21,8 @@ const HomePageLayout = () => {
 
 
     useEffect(()=>{
-        console.log("1")
         if(!token) return navigate("/");
-        if(user === null){
-            dispatch(getUserByToken());
-        }
+        dispatch(getUserByToken());
     },[])
 
 

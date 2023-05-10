@@ -15,6 +15,8 @@ export const AddRoutineForm = () => {
     const dispatch = useAppDispatch();
     const {categories} = useAppSelector(state => state.category);
     const {products} = useAppSelector(state => state.products);
+    const {user} = useAppSelector(state => state.auth);
+
 
     useEffect(() => {
         dispatch(getCategories());
@@ -35,9 +37,8 @@ export const AddRoutineForm = () => {
         const day = String(date.getDate()).padStart(2, '0');
         const formattedDate = `${year}-${month}-${day}`;
         console.log(formattedDate)
-        const routine:CreateRoutineI = {userId: '6453bdd6ff1ffb79f2639413', horario: datos.horario, productId: datos.producto, date: formattedDate};
+        const routine:CreateRoutineI = {userId: user?.id || "", horario: datos.horario, productId: datos.producto, date: formattedDate};
         dispatch(createRoutine(routine))
-        // reset();
     }
 
     const onChangeProductByCategory = (e:ChangeEvent<HTMLInputElement>) => {

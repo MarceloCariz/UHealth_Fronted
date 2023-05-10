@@ -1,8 +1,8 @@
-import { Drawer , Box, Typography, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider} from '@mui/material'
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { Drawer , Box, Typography} from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { toogleDrawer } from '../../store/slices/ui/uiSlice';
-import { useNavigate } from 'react-router-dom';
+import { DrawerOptionsAdmin } from './admin/DrawerOptionsAdmin';
+import { DrawerOptionsUser } from './user/DrawerOptionsUser';
 
 
 export const DrawerUi = () => {
@@ -11,7 +11,6 @@ export const DrawerUi = () => {
     const {user} = useAppSelector(state => state.auth);
 
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
 
     const role = user?.role;
     return (
@@ -20,31 +19,16 @@ export const DrawerUi = () => {
             open={isOpenDrawer}
             onClose={()=>dispatch(toogleDrawer())}
         >
-            <Box sx={{width: 250, marginTop: "1rem"}}>
-            <Typography component={"h2"} fontSize={28} textAlign="center" fontWeight={"semibold"}>Menu</Typography>
-            <List>
-                <ListItem  disablePadding>
-                    <ListItemButton onClick={() => {
-                            role === "administrador" ? navigate('users') : navigate("/home")
-                        }}>
-                        <ListItemIcon>
-                            <AccessTimeIcon color="primary"/>
-                        </ListItemIcon>
-                        <ListItemText primary={`${role === "usuario" ? "Crear rutina" : "Administrar usuarios"} `} />
-                    </ListItemButton>
-                </ListItem>
-            </List>
-            <Divider />
-            <List>
-                <ListItem  disablePadding>
-                    <ListItemButton onClick={() => navigate('routines')}>
-                        <ListItemIcon>
-                            {/* ICON */}
-                        </ListItemIcon>
-                        <ListItemText primary={"Rutinas"} />
-                    </ListItemButton>
-                </ListItem>
-            </List>
+            <Box sx={{ marginTop: "1rem"}} paddingX={8}>
+                <Typography component={"h2"} fontSize={32} textAlign="center" fontWeight={"semibold"}>Menú</Typography>
+                <Box >
+                    {
+                        role === "administrador" ?
+                        <DrawerOptionsAdmin/>    :
+                        <DrawerOptionsUser/>
+                    }
+                </Box>
+
             </Box>
         </Drawer>
     )

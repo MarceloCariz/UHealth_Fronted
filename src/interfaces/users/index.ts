@@ -4,7 +4,7 @@ export interface UserI {
     id?:       string;
     username: string;
     email:    string;
-    password: string;
+    password?: string;
     rolName:  string;
     // profile:  Profile;
     // routines: Routine[];

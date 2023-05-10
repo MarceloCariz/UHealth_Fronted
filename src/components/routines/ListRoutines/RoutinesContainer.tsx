@@ -1,15 +1,24 @@
+import {useEffect} from 'react'
 import {Grid, Typography} from '@mui/material';
-import { useAppSelector } from '../../../hooks/reduxHook';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHook';
 import { RoutineItem } from './RoutineItem';
 import { useNavigate } from 'react-router-dom';
+import { getAllRoutinesByUser } from '../../../store/slices/routine/thunk';
 
 
 
 
 export const RoutinesContainer = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
     const {routines} = useAppSelector(state => state.routine);
-    console.log(routines.length)
+    const {user} = useAppSelector(state => state.auth);
+
+    useEffect(() => {
+        if(!user) return;
+        dispatch(getAllRoutinesByUser());
+    }, [user])
     return (
         <Grid container width={"100%"} display={'flex'} spacing={2} >
                 {

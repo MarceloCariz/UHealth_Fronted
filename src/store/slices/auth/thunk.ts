@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import uhealththApi from "../../../api/uhealthAxios";
 import { toastError } from "../../../components/ui";
-import { LoginI } from "../../../interfaces";
+import { AuthI, LoginI } from "../../../interfaces";
 import { setError, setUser, startLogin } from "./authSlice";
 import { AxiosError } from "axios";
 
@@ -50,7 +50,8 @@ export const getUserByToken = () => {
         }
         try{
             const {data} = await uhealththApi("/user/refresh-token", {headers});
-            const user = {
+            const user: AuthI = {
+                id: data.id,
                 role: data.role,
                 email: data.email,
                 username: data.username,

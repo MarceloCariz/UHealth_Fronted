@@ -1,14 +1,18 @@
 import uhealththApi from "../../../api/uhealthAxios";
 import { toastError, toastSuccess } from "../../../components/ui";
 import { CreateRoutineI } from "../../../interfaces";
+import { RootState } from "../../store";
 import { removeRoutineById, setRoutinesByUser } from "./routineSlice";
 
 
 
 export const getAllRoutinesByUser = () => {
-    return async(dispatch:any, getState:any)=>{
+    return async(dispatch:any, getState: () => RootState)=>{
         try {
-            const userId = '6453bdd6ff1ffb79f2639413';
+            const {user} = getState().auth;
+
+            const userId = user?.id!;
+
             const {data} = await uhealththApi(`/user/routine/get/all/${userId}`);
             
             dispatch(setRoutinesByUser(data));

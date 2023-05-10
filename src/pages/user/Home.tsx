@@ -1,5 +1,5 @@
 import {Box, Typography} from '@mui/material';
-import { AddRoutineForm } from '../components/routines/AddRoutineForm';
+import { AddRoutineForm } from '../../components/routines/AddRoutineForm';
 
 
 const Home = () => {

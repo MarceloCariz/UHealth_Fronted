@@ -1,6 +1,6 @@
-import { LazyExoticComponent, lazy } from "react";
-import Home from "../pages/Home";
-import Routines from "../pages/Routines";
+import { LazyExoticComponent } from "react";
+import {Routines, Home} from "../pages/user/";
+
 
 type JSXComponent = () =>  JSX.Element;
 

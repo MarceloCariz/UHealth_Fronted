@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import uhealththApi from "../../../api/uhealthAxios";
 import { toastError, toastSuccess } from "../../../components/ui";
 import { UserI } from "../../../interfaces";
@@ -30,8 +31,9 @@ export const createUser = (user : UserI, resetForm:any) => {
             toastSuccess("Usuario añadido");
             resetForm();
         }catch(error){
-            console.log(error)
-            toastError("Hubo un error")
+            const err = error as AxiosError;
+            console.log(err.response?.data)
+            toastError(`${err.response?.data}`)
         }
 
     }
@@ -40,15 +42,14 @@ export const createUser = (user : UserI, resetForm:any) => {
 export const updateUser = (user : UserI) => {
     return async(dispatch:any, getState:any)=>{
         try{
-            console.log(user)
-            const {data} = await uhealththApi.put(`/user/${user.id}`, {...user, password: '122345678'});
+            const {data} = await uhealththApi.put(`/user/${user.id}`, user);
             dispatch(editUser({user:data}));
             toastSuccess("Usuario actualizado");
         }catch(error){
-            console.log(error)
-            toastError("Hubo un error")
+            const err = error as AxiosError;
+            console.log(err.response?.data)
+            toastError(`${err.response?.data}`)
         }
-
     }
 }
 
@@ -59,8 +60,9 @@ export const deleteUser = (id: string) => {
             dispatch(removeUser({id}));
             toastSuccess(data);
         }catch(error){
-            console.log(error)
-            toastError("Hubo un error")
+            const err = error as AxiosError;
+            console.log(err.response?.data)
+            toastError(`${err.response?.data}`)
         }
 
     }

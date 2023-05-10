@@ -1,5 +1,5 @@
 import {Box, Typography} from '@mui/material'
-import { ListUsers } from '../../components'
+import { ListUsers } from '../../../components'
 
 const Users = () => {
     

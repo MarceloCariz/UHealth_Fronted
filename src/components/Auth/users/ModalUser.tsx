@@ -22,6 +22,7 @@ export const ModalUser = () => {
             return
         }
         //Actualizar
+        console.log(user)
         dispatch(updateUser(user));
     }
 
@@ -36,9 +37,21 @@ export const ModalUser = () => {
         id: activeUserAction?.id  || "",
         username: activeUserAction?.username || "",
         email: activeUserAction?.email || "",
-        password: '',
         rolName: activeUserAction?.rolName || "",
     }
+
+    const ValidationSchemaAdd = Yup.object({
+        username: Yup.string().min(3,"Debe ser de un minimo de 3 caracteres").max(20, "No debe tener mas de 20 caracteres").required("Este campo es obligatorio"),
+        email: Yup.string().email("Email no valido").required("Este campo es obligatorio"),
+        password: Yup.string().min(8,"Debe ser de un minimo de 8 caracteres").max(20, "No debe tener mas de 20 caracteres").required("Este campo es obligatorio"),
+        rolName: Yup.string().oneOf(['usuario','administrador'], "El rol debe ser usuario o administrador").required("Este campo es obligatorio")
+    })
+
+    const ValidationSchemaEdit= Yup.object({
+        username: Yup.string().min(3,"Debe ser de un minimo de 3 caracteres").max(20, "No debe tener mas de 20 caracteres").required("Este campo es obligatorio"),
+        email: Yup.string().email("Email no valido").required("Este campo es obligatorio"),
+        rolName: Yup.string().oneOf(['usuario','administrador'], "El rol debe ser usuario o administrador").required("Este campo es obligatorio")
+    })
 
     return (
         <Modal
@@ -52,12 +65,7 @@ export const ModalUser = () => {
                     initialValues={isModalUserOpen.type === "add" ? initialValuesAdd : initialValuesEdit}
                     onSubmit={(e:UserI, {resetForm}) => {handleSubmitActionModal(e, resetForm)}}
                     validationSchema={
-                        Yup.object({
-                            username: Yup.string().min(3,"Debe ser de un minimo de 3 caracteres").max(20, "No debe tener mas de 20 caracteres").required("Este campo es obligatorio"),
-                            email: Yup.string().email("Email no valido").required("Este campo es obligatorio"),
-                            password: Yup.string().min(8,"Debe ser de un minimo de 8 caracteres").max(20, "No debe tener mas de 20 caracteres").required("Este campo es obligatorio"),
-                            rolName: Yup.string().oneOf(['usuario','administrador'], "El rol debe ser usuario o administrador").required("Este campo es obligatorio")
-                        })
+                        isModalUserOpen.type === "add" ? ValidationSchemaAdd : ValidationSchemaEdit
                     }
                 >
                     {
@@ -66,7 +74,11 @@ export const ModalUser = () => {
                                 <Box width={400} display={"flex"} flexDirection={"column"} gap={2}>
                                     <MyTextInput label='Nombre de usuario' name="username"/>
                                     <MyTextInput label='Correo electronico' name="email" />
-                                    <MyTextInput label='Contraseña' name="password" />
+                                    {
+                                        isModalUserOpen.type === "add" && (
+                                            <MyTextInput label='Contraseña' name="password" />
+                                        )
+                                    }
                                     <MySelect label='Rol' name='rolName'  >
                                         <MenuItem value={"seleccione"}>Seleccione un rol</MenuItem>
                                         <MenuItem value={"administrador"}>Administrador</MenuItem>
