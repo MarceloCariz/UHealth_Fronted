@@ -20,3 +20,9 @@ export interface CreateRoutineI {
     date:      string;
     horario:   string;
 }
+
+export interface UpdateRoutineI {
+    productId: string;
+    date:      string;
+    horario:   string;
+}

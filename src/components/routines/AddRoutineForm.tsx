@@ -81,7 +81,7 @@ export const AddRoutineForm = () => {
                         {/* <FormControl fullWidth> */}
                             <Box width={400} display={"flex"} flexDirection={"column"} gap={2}>
                                 <MySelect 
-                                        defaultValue={"seleccione"}
+                                        // defaultValue={"seleccione"}
                                         error={errors.categorias ? true : false}
                                         onChange={(e:any) => 
                                         {
@@ -107,7 +107,7 @@ export const AddRoutineForm = () => {
                                 <MySelect
                                     error={errors.producto ? true : false}
                                     label="Producto" name="producto" 
-                                    defaultValue={"seleccione"}
+                                    // defaultValue={"seleccione"}
                                 >
                                     <MenuItem  value="seleccione">Seleccione un producto</MenuItem>
                                     {

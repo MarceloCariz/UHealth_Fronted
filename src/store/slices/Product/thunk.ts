@@ -3,10 +3,10 @@ import {  setProductsByCategory } from "./productSlice";
 
 
 
-export const getProductByCategory = (productId:string) => {
+export const getProductByCategory = (categoryId:string) => {
     return async(dispatch:any, getState:any)=>{
         try {
-            const {data} = await uhealththApi(`/products/category/${productId}`);
+            const {data} = await uhealththApi(`/products/category/${categoryId}`);
             dispatch(setProductsByCategory(data))
         } catch (error) {
             console.log(error)

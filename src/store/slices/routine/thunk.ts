@@ -1,8 +1,8 @@
 import uhealththApi from "../../../api/uhealthAxios";
 import { toastError, toastSuccess } from "../../../components/ui";
-import { CreateRoutineI } from "../../../interfaces";
+import { CreateRoutineI, RoutineResponseI, UpdateRoutineI } from "../../../interfaces";
 import { RootState } from "../../store";
-import { removeRoutineById, setRoutinesByUser } from "./routineSlice";
+import { removeRoutineById, setRoutinesByUser, updateRoutineById } from "./routineSlice";
 
 
 
@@ -41,6 +41,24 @@ export const createRoutine = (routine:CreateRoutineI) => {
             const {data} = await uhealththApi.post('/user/routine/create',routine);
             console.log(data)
             toastSuccess("Rutina creada correctamente")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const putRoutine = (routine: any) => {
+    return async(dispatch:any, getState:any)=>{
+        try {
+            const routineNewData = {
+                productId: routine.productName,
+                date: routine.date,
+                horario: routine.horario
+            }
+            const {data} = await uhealththApi.put(`/user/routine/update/${routine.id}`,routineNewData);
+            console.log(data)
+            dispatch(updateRoutineById({routine:data}))
+            toastSuccess("Rutina Actualizada correctamente")
         } catch (error) {
             console.log(error)
         }

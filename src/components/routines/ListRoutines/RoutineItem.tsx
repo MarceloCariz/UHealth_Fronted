@@ -3,6 +3,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { RoutineResponseI } from '../../../interfaces';
 import { deleteRoutineById } from '../../../store/slices/routine/thunk';
 import { useAppDispatch } from '../../../hooks/reduxHook';
+import { EditRoutineButton } from '../ActionsButtons';
+import dayjs from 'dayjs';
 
 interface Props {
     routine: RoutineResponseI;
@@ -15,9 +17,12 @@ export const RoutineItem = ({routine}:Props) => {
     const dispatch = useAppDispatch();
 
     const dateTransform = () => {
-        const parseDate = new Date(date);
-        const formatedDate = parseDate.toLocaleDateString('es-ES',{ day: '2-digit', month: '2-digit', year: 'numeric' });
-        return formatedDate;
+        const newDate = dayjs(date).format("DD/MM/YYYY");
+        return newDate;
+        // console.log(parseDate)
+        // return
+        // const formatedDate = parseDate.toLocaleDateString('es-US',{ day: '2-digit', month: '2-digit', year: 'numeric' });
+        // return formatedDate;
     }
 
     const removeRoutine = () => {
@@ -57,6 +62,7 @@ export const RoutineItem = ({routine}:Props) => {
                         <Typography variant="h5">Categoria: 
                             <Typography color={"gray"} textTransform={"capitalize"} variant='h5' component={"span"}> {product.category.categoryName} </Typography>
                         </Typography>
+                        <EditRoutineButton routine={routine}/>
                     </Box>
                 </CardContent>
             </Card>
