@@ -41,15 +41,15 @@ export const AppBar = () => {
 
 
                         <Box sx={{flexGrow: 0}} display={"flex"} alignItems={"center"}>
-                            <Typography textTransform={"capitalize"} variant='h6'>{user?.username}</Typography>
+                            <Typography visibility={{xs:"hidden",md:"visible"}} textTransform={"capitalize"} variant='h6'>{user?.username}</Typography>
                             <Tooltip title="Perfil">
                                 <IconButton>
                                     <Avatar />
                                 </IconButton>
                             </Tooltip>
-                            <Tooltip title="Salir">
-                                <IconButton onClick={handleLogout}>
-                                    <LogoutIcon fontSize='large' sx={{color:"white"}}/>
+                            <Tooltip  title="Salir">
+                                <IconButton  onClick={handleLogout}>
+                                    <LogoutIcon  sx={{color:"white", fontSize:{xs:32,md:42}}}/>
                                 </IconButton>
                             </Tooltip>
 

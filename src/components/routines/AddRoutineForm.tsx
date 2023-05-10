@@ -3,12 +3,14 @@ import {  Form, Formik } from "formik"
 import * as Yup from 'yup';
 import { MySelect } from "../formik/MySelect";
 import {MenuItem, Button, Select, Box, TextField, Typography} from '@mui/material';
-import { getDateToday } from "../../utils/dates";
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { getCategories } from '../../store/slices/category/thunk';
 import { getProductByCategory } from '../../store/slices/Product/thunk';
 import { createRoutine } from '../../store/slices/routine/thunk';
 import { CreateRoutineI } from '../../interfaces';
+import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
 
 export const AddRoutineForm = () => {
 
@@ -27,17 +29,12 @@ export const AddRoutineForm = () => {
         categorias: "seleccione",
         producto: "seleccione",
         horario: "seleccione",
+        date: "",
     }
 
     const handleSubmit = (datos:any) => {
-        console.log(datos)
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const formattedDate = `${year}-${month}-${day}`;
-        console.log(formattedDate)
-        const routine:CreateRoutineI = {userId: user?.id || "", horario: datos.horario, productId: datos.producto, date: formattedDate};
+
+        const routine:CreateRoutineI = {userId: user?.id || "", horario: datos.horario, productId: datos.producto, date: datos.date};
         dispatch(createRoutine(routine))
     }
 
@@ -64,13 +61,14 @@ export const AddRoutineForm = () => {
             initialValues={initialValues}
             onSubmit={(values, {resetForm}) => {
                 handleSubmit(values);
-                resetForm({values: {categorias: 'seleccione', producto: 'seleccione', horario: 'seleccione'}});
+                resetForm({values: {categorias: 'seleccione', producto: 'seleccione', horario: 'seleccione', date: "" }});
             }}
             validationSchema={
                 Yup.object({
                     categorias: Yup.string().oneOf(getCategoriesIds(), 'La categoría debe ser válida').required("Este campo es obligatorio"),
                     producto: Yup.string().oneOf(getProductsIds(), "Producto incorrecto").required("Este campo es obligatorio"),
                     horario: Yup.string().oneOf(['mañana','tarde','noche'], "Horaio debe ser mañana, tarde o noche ").required("Este campo es obligatorio"),
+                    date: Yup.date().required("Este campo es obligatorio")
                 })
             }
         >
@@ -79,7 +77,7 @@ export const AddRoutineForm = () => {
                 ({handleChange, errors, values, setFieldValue, handleReset}) => (
                     <Form>
                         {/* <FormControl fullWidth> */}
-                            <Box width={400} display={"flex"} flexDirection={"column"} gap={2}>
+                            <Box width={{xs:"110%", md:400}} display={"flex"} flexDirection={"column"} gap={2}>
                                 <MySelect 
                                         // defaultValue={"seleccione"}
                                         error={errors.categorias ? true : false}
@@ -107,7 +105,7 @@ export const AddRoutineForm = () => {
                                 <MySelect
                                     error={errors.producto ? true : false}
                                     label="Producto" name="producto" 
-                                    // defaultValue={"seleccione"}
+                                    defaultValue={"seleccione"}
                                 >
                                     <MenuItem  value="seleccione">Seleccione un producto</MenuItem>
                                     {
@@ -132,7 +130,10 @@ export const AddRoutineForm = () => {
                                     <MenuItem value={"tarde"}>Tarde</MenuItem>
                                     <MenuItem value={"noche"}>Noche</MenuItem>
                                 </MySelect>
-                                <TextField  disabled label="fecha" value={getDateToday()}/>
+                                <LocalizationProvider  dateAdapter={AdapterDayjs}>
+                                    <DatePicker onChange={(e) => setFieldValue("date",e?.format("YYYY-MM-DD") || "")} format='DD/MM/YYYY' label="Fecha" defaultValue={dayjs(new Date())}/>
+                                </LocalizationProvider>
+                                {/* <TextField  disabled label="fecha" value={getDateToday()}/> */}
                                 <Button color='secondary' variant='contained' type="submit">Crear</Button>
                             </Box>
 

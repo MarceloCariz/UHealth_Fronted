@@ -12,7 +12,7 @@ export const EditModal = () => {
         <Modal
             open={isOpenEditModalRoutine}
             onClose={() => dispatch(toogleModaleEditRoutine())}
-            sx={{border: "1px solid red", display:"flex", alignItems:"center", justifyContent: "center"}}
+            sx={{display:"flex", alignItems:"center", justifyContent: "center"}}
         >
             <Box  width={"25%"} height={"50%"} sx={{backgroundColor: "white"}} borderRadius={3} paddingX={4} paddingY={2}  
                 display={"flex"} flexDirection={"column"} justifyItems={"center"} alignItems={"center"} gap={5}>
