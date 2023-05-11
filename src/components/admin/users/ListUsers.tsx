@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
-import {Box, Typography, CircularProgress, LinearProgress} from '@mui/material';
-import { DataGrid, GridCellParams, GridColDef, GridRowParams, GridToolbar } from '@mui/x-data-grid';
+import {Box, Typography, LinearProgress} from '@mui/material';
+import { DataGrid, GridCellParams, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { getAllUsers } from '../../../store/slices/user/thunk';
 import { AddUserButton } from './AddUserButton';
@@ -13,7 +13,7 @@ import { ModalUser } from '.';
 
 export const ListUsers = () => {
     const dispatch = useAppDispatch();
-    const {users, loadingUsers} = useAppSelector(state => state.users);
+    const {users} = useAppSelector(state => state.users);
 
     useEffect(() => {
         // setTimeout(() => {
@@ -40,7 +40,7 @@ export const ListUsers = () => {
         {field: 'rolName', headerName: "Rol", flex: 1, minWidth: 150, renderCell:(params: GridCellParams) => (
             <Typography component={"span"} >{`${params.value}`}</Typography>
         ),},
-        {field: 'id', headerName:"Acciones", flex: 1,minWidth: 150, renderCell: (params: GridCellParams) =>(
+        {field: 'id', headerName:"Acciones", flex: 1,minWidth: 150, renderCell: () =>(
             <Box display={"flex"} gap={2}>
                 <EditUserButton/>
                 <RemoveUserButton/>

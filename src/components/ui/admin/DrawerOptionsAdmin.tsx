@@ -32,7 +32,7 @@ export const DrawerOptionsAdmin = () => {
             <List>
                 <ListItem  disablePadding>
                     <ListItemButton onClick={() => {
-                            navigate('product')
+                            navigate('products')
                             dispatch(toogleDrawer())
                         }}>
                         <ListItemIcon>

@@ -34,7 +34,12 @@ export const AddRoutineForm = () => {
 
     const handleSubmit = (datos:any) => {
 
-        const routine:CreateRoutineI = {userId: user?.id || "", horario: datos.horario, productId: datos.producto, date: datos.date};
+        const routine:CreateRoutineI = {
+            userId: user?.id || "", 
+            horario: datos.horario, 
+            productId: datos.producto, 
+            date: datos.date === "" ? dayjs(new Date()).format("YYYY-MM-DD") : datos.date
+        };
         dispatch(createRoutine(routine))
     }
 
@@ -57,7 +62,6 @@ export const AddRoutineForm = () => {
 
     return (
         <Formik
-            enableReinitialize={true}
             initialValues={initialValues}
             onSubmit={(values, {resetForm}) => {
                 handleSubmit(values);
@@ -68,7 +72,7 @@ export const AddRoutineForm = () => {
                     categorias: Yup.string().oneOf(getCategoriesIds(), 'La categoría debe ser válida').required("Este campo es obligatorio"),
                     producto: Yup.string().oneOf(getProductsIds(), "Producto incorrecto").required("Este campo es obligatorio"),
                     horario: Yup.string().oneOf(['mañana','tarde','noche'], "Horaio debe ser mañana, tarde o noche ").required("Este campo es obligatorio"),
-                    date: Yup.date().required("Este campo es obligatorio")
+                    date: Yup.date()
                 })
             }
         >
@@ -89,7 +93,7 @@ export const AddRoutineForm = () => {
                                         }}
                                         label="Categorías" name="categorias" 
                                 >
-                                    <MenuItem  value="seleccione">Seleccione una categoria</MenuItem>
+                                    <MenuItem  value="seleccione">Seleccione una categoría</MenuItem>
                                     {
                                         categories.map(({categoryName, id}) => (
                                             <MenuItem  key={id} value={id}>

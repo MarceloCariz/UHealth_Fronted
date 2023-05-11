@@ -86,7 +86,7 @@ export const EditForm = () => {
                                         }} 
                                         label="Categorías" name="categoryName" 
                                 >
-                                    <MenuItem  value="seleccione">Seleccione una categoria</MenuItem>
+                                    <MenuItem  value="seleccione">Seleccione una categoría</MenuItem>
                                     {
                                         categories.map(({categoryName, id}) => (
                                             <MenuItem  key={id} value={id}>

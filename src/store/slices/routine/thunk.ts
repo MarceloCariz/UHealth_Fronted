@@ -13,9 +13,9 @@ export const getAllRoutinesByUser = () => {
 
             const userId = user?.id!;
 
-            const {data} = await uhealththApi(`/user/routine/get/all/${userId}`);
-            
-            dispatch(setRoutinesByUser(data));
+            const {data} = await uhealththApi<RoutineResponseI[]>(`/user/routine/get/all/${userId}`);
+            const routinesSorted = data.sort((a,b)=> ( Number(new Date(b.date)) - Number(new Date(a.date))));
+            dispatch(setRoutinesByUser(routinesSorted));
         } catch (error) {
             console.log(error)
         }

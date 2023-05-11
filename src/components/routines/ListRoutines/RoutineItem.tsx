@@ -59,7 +59,7 @@ export const RoutineItem = ({routine}:Props) => {
                         <Typography variant="h5">Carbohidratos: 
                             <Typography color={"gray"} textTransform={"capitalize"} variant='h5' component={"span"}> {product.carbs} g</Typography>
                         </Typography>
-                        <Typography variant="h5">Categoria: 
+                        <Typography variant="h5">Categoría: 
                             <Typography color={"gray"} textTransform={"capitalize"} variant='h5' component={"span"}> {product.category.categoryName} </Typography>
                         </Typography>
                         <EditRoutineButton routine={routine}/>

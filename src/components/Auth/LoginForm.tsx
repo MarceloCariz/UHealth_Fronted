@@ -31,8 +31,10 @@ export const LoginForm = () => {
         email: "",
         password: ""
     }
+
+    
     return (
-        <Box sx={{backgroundColor: "white"}} boxShadow={10} gap={5} paddingY={5} paddingX={5} display={"flex"} flexDirection={"column"} alignItems={"center"}>
+        <Box sx={{backgroundColor: "white"}} borderRadius={3} boxShadow={10} gap={5} paddingY={5} paddingX={5} display={"flex"} flexDirection={"column"} alignItems={"center"}>
             <Box>
                 <Typography variant="h4">Inicio de Sesión</Typography>
             </Box>
@@ -55,7 +57,7 @@ export const LoginForm = () => {
                                         <MyTextInput error={errors.email ? true : false} name="email" label="Correo electronico" placeholder="ejemplo@correo.com"/>
                                         <MyTextInput error={errors.password ? true : false} name="password" label="Contraseña" type="password"/>
                                         <Button fullWidth variant="contained" type="submit">
-                                            Iniciar Sesion
+                                            Iniciar Sesión
                                         </Button>
                                     </Box>
 

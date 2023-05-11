@@ -1,3 +1,4 @@
+import { Products } from "../pages/admin";
 import {Users, Dashboard} from "../pages/admin/users/";
 import { RoutesI } from "./routesUsers";
 
@@ -17,7 +18,12 @@ export const routesAdmin: RoutesI[] = [
         to: 'users',
         Component: Users,
         name: 'Users',
-        index: true,
     },
+    {
+        path: 'products',
+        to: 'products',
+        Component: Products,
+        name: 'products',
+    }
 
 ]

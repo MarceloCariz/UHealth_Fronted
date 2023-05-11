@@ -36,6 +36,7 @@ export const routineSlice = createSlice({
                 }
                 return routine;
             })
+            state.routines = state.routines.sort((a,b)=> ( Number(new Date(b.date)) - Number(new Date(a.date))));
 
             return state;
         },
