@@ -57,8 +57,8 @@ export const ListProducts = () => {
         <Box marginTop={2} display={"flex"} flexDirection={"column"} gap={2} justifyContent={"center"} alignItems={"center"}>
         {/* <ModalUser/> */}
         <ModalProductActions/>
-        <Box display={"flex"} gap={2}>
-            <AddCategoryButton/>
+        <Box display={"flex"} gap={2} width={"80%"}>
+            {/* <AddCategoryButton/> */}
             <AddProductButton/>
         </Box>
         {/* {
@@ -67,12 +67,18 @@ export const ListProducts = () => {
             )
         } */}
         <DataGrid
-            sx={{width: "70%"}}
+            sx={{width: "80%", boxShadow: '20'}}
             columns={columns}
             rows={allProducts}
             slots={{
                 toolbar: GridToolbar,
-                loadingOverlay: LinearProgress
+                loadingOverlay: LinearProgress,
+            }}
+            
+            initialState={{
+                pagination: {
+                    paginationModel: { pageSize: 5, page: 0 },
+                },
             }}
             localeText={spanishText}
             slotProps={{
@@ -81,6 +87,7 @@ export const ListProducts = () => {
                     onMouseLeave: handleClearProductSelected,
                 }
             }}
+            
             density='comfortable'
         />
     </Box>

@@ -73,7 +73,7 @@ export const ModalUser = () => {
                             <Form>
                                 <Box width={400} display={"flex"} flexDirection={"column"} gap={2}>
                                     <MyTextInput label='Nombre de usuario' name="username"/>
-                                    <MyTextInput label='Correo electronico' name="email" />
+                                    <MyTextInput label='Correo electrónico' name="email" />
                                     {
                                         isModalUserOpen.type === "add" && (
                                             <MyTextInput label='Contraseña' name="password" />
